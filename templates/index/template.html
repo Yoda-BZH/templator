@@ -5,13 +5,44 @@
 <div class="row">
 <div class="col" id="templateConfig">
   {{ form(form) }}
+  <hr />
+<input class="btn btn-primary" type="button" id="copyToClipBoard" data-copied="Donn&eacute;es copi&eacute;es dans le presse-papier" value="Copier dans le presse-papier" />
 </div>
 
 
 <div class="col" id="render">
-<pre>
+<textarea height="100%" style="height: 100%" class="form-control" id="renderData">
 {{ render|raw }}
-</pre>
+</textarea>
 </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+function copyToClipBoard(elemId) {
+  /* Get the text field */
+  var copyText = document.getElementById(elemId);
+
+  /* Select the text field */
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
+
+  /* Alert the copied text */
+  //alert("Copied the text: " + copyText.value);
+};
+
+$(document).ready(function()
+{
+  $("#copyToClipBoard").bind('click', function()
+  {
+    copyToClipBoard("renderData");
+    button = $("#copyToClipBoard");
+    button.val(button.data('copied')).removeClass('btn-primary').addClass('btn-warning');
+  });
+});
+</script>
 {% endblock %}
