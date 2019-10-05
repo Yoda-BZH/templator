@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<form method="post" action="/file">
+  <select name="file" id="file">
+    {% for filename in filenames %}
+      <option value="{{ filename }}">{{ filename }}</option>
+    {% endfor %}
+  </select>
+  <input type="submit" value="Valider" />
+</form>
+{% endblock %}

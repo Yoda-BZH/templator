@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+<div class="row">
+<div class="col" id="templateConfig">
+  {{ form(form) }}
+</div>
+
+
+<div class="col" id="render">
+<pre>
+{{ render|raw }}
+</pre>
+</div>
+</div>
+{% endblock %}
