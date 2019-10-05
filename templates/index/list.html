@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<form method="post" action="/file">
+<form method="post" action="{{ path('file') }}">
   <select name="file" id="file">
     {% for filename in filenames %}
       <option value="{{ filename }}">{{ filename }}</option>

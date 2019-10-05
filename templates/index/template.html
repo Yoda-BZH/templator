@@ -2,7 +2,7 @@
 
 
 {% block body %}
-<div class="row">
+<div class="row" style="height: 100%">
 <div class="col" id="templateConfig">
   {{ form(form) }}
   <hr />
@@ -11,7 +11,7 @@
 
 
 <div class="col" id="render">
-<textarea height="100%" style="height: 100%" class="form-control" id="renderData">
+<textarea height="100%" style="height: 100%" class="form-control text-monospace small" id="renderData">
 {{ render|raw }}
 </textarea>
 </div>
