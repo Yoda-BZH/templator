@@ -1,0 +1,13 @@
+vars:
+  main:
+    type: string
+    default: foobar
+  bar:
+    type: string
+    default: bar
+  dynamic_value:
+    type: int
+    default: 0
+  comment:
+    type: string
+    default: ""
