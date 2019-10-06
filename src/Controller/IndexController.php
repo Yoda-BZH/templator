@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Yaml\Yaml;
 
-
+use Symfony\Component\Finder\Finder;
 
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -24,10 +24,21 @@ class IndexController extends AbstractController
         $jinjas = $this->getParameter('templates.jinja');
         //$configs = $this->getParameter('templates.config');
 
-        $files = glob($jinjas . '/*');
-        $filenames = array_map('basename', $files);
-
-        //var_dump($filenames, $files);
+        //$files = glob($jinjas . '/*');
+        //$filenames = array_map('basename', $files);
+        $finder = new Finder();
+        $finder->files()->in($jinjas);
+        //var_dump($files);
+        $filenames = array();
+        foreach($finder as $file)
+        {
+          $dir = dirname($file->getRelativePathname());
+          if(!isset($filenames[$dir]))
+          {
+            $filenames[$dir] = array();
+          }
+          $filenames[$dir][] = $file->getFilename();
+        }
         return $this->render('index/list.html', array('filenames' => $filenames));
         //return new Response('', 200);
     }
@@ -36,7 +47,7 @@ class IndexController extends AbstractController
     {
       $jinjas = $this->getParameter('templates.jinja');
       $requestedFilename = $request->request->get('file');
-      if(!preg_match('/^[a-zA-Z0-9\.-]+$/', $requestedFilename))
+      if(!preg_match('/^[a-zA-Z0-9][a-zA-Z0-9\.-\/]+$/', $requestedFilename))
       {
         return new Response('error, request filename "'.$requestedFilename . '" not found', 404);
       }
@@ -51,24 +62,36 @@ class IndexController extends AbstractController
       $formData = $request->request->get('form');
       $requestedFilename = $request->attributes->get('file');
 
-      if(!preg_match('/^[a-zA-Z0-9\.-]+$/', $requestedFilename))
+      if(!preg_match('/^[a-zA-Z0-9][a-zA-Z0-9\.-\/]+$/', $requestedFilename))
       {
         return new Response('error, request filename "'.$requestedFilename . '" not found', 404);
       }
 
-      if(!file_exists($jinjas . '/' . $requestedFilename))
+      //if(!file_exists($jinjas . '/' . $requestedFilename))
+      //{
+      //  return new Response('Template file not found', 404);
+      //}
+      $finder = new Finder();
+      $finder->in($jinjas . '/' . dirname($requestedFilename))->name(basename($requestedFilename));
+      $files = iterator_to_array($finder, false);
+      if(count($files) != 1)
       {
         return new Response('Template file not found', 404);
       }
+      //var_dump($files);
 
-      $configFilename = str_replace('.sls', '.yaml', $requestedFilename);
+      $configFilename = str_replace($files[0]->getExtension(), 'yaml', $requestedFilename);
 
-      if(!file_exists($configs . '/' . $configFilename))
+      $finderConfig = new Finder();
+      $finderConfig->in($configs . '/' . dirname($requestedFilename))->name(basename($configFilename));
+      $configs = iterator_to_array($finderConfig, false);
+      //var_dump($finderConfig, $configs);
+      if(count($configs) != 1)
       {
         return new Response('Config file not found', 404);
       }
 
-      $config = Yaml::parseFile($configs . '/' . $configFilename);
+      $config = Yaml::parseFile($configs[0]->getPathname());
       //var_dump($config);
       $formBuilder = $this->createFormBuilder();
 

@@ -5,6 +5,8 @@ index:
 gen:
     path: /gen/{file}
     controller: App\Controller\IndexController::f
+    requirements:
+        file: .+
 
 file:
     path: /file

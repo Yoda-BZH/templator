@@ -3,9 +3,13 @@
 {% block body %}
 <form method="post" action="{{ path('file') }}">
   <select name="file" id="file">
-    {% for filename in filenames %}
-      <option value="{{ filename }}">{{ filename }}</option>
+    {% for dirname, files in filenames %}
+    <optgroup label="{{ dirname }}">
+    {% for filename in files %}
+      <option value="{{ dirname }}/{{ filename }}">{{ filename }}</option>
     {% endfor %}
+  </optgroup>
+  {% endfor %}
   </select>
   <input type="submit" value="Valider" />
 </form>
