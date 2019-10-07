@@ -32,10 +32,10 @@ The second level is each twig variable declared in the template.
 The third levels are :
 * `type`. The variable types. This field is mandatory. Currently supported 
 types are :
-** int
-** string
-** select
-** password
+  * int
+  * string
+  * select
+  * password
 * `default`. The default value for the variable.
 * For `select`type, `values` is mandatory. It contains the possible choices
 
