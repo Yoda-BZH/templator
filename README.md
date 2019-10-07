@@ -7,7 +7,7 @@ Installation
 
 This is a [Symfony][1] project.
 
-Please use the installation guide from Symfony [2]
+Please use the [installation guide from Symfony][2]
 
 In short:
 ```
@@ -20,7 +20,7 @@ Templates
 Any type of file can be generated.
 
 Place a file in templates/jinja/<directory>/<filename>.<extension>.
-This is the template file. Use twig (jinja)[3] syntax for your template.
+This is the template file. Use [twig (jinja)][3] syntax for your template.
 
 Create a file in templates/configs/<directory>/<filename>.yaml .
 <directory> and <filename> must be identical to the template.
@@ -60,8 +60,6 @@ vars:
     default: ""
 ```
 
-Links
------
 [1]: https://symfony.com
 [2]: https://symfony.com/doc/current/setup.html#running-symfony-applications
 [3]: https://twig.symfony.com/doc/2.x/
