@@ -60,6 +60,10 @@ vars:
     default: ""
 ```
 
+Images:
+Github image provided by [http://tholman.com/github-corners/][4]
+
 [1]: https://symfony.com
 [2]: https://symfony.com/doc/current/setup.html#running-symfony-applications
 [3]: https://twig.symfony.com/doc/2.x/
+[4]: http://tholman.com/github-corners/
