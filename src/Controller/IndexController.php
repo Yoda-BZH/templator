@@ -123,7 +123,12 @@ class IndexController extends AbstractController
           case 'select':
             $type = ChoiceType::class;
             $choices = array_combine($varData['values'], $varData['values']);
-            $formBuilder->add($key, $type, array('choices' => $choices));
+            $options = array('choices' => $choices);
+            if(isset($varData['default']))
+            {
+              $options['data'] = $varData['default'];
+            }
+            $formBuilder->add($key, $type, $options);
             break;
           case 'password':
             $type = TextType::class;
