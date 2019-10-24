@@ -2,13 +2,23 @@ index:
     path: /
     controller: App\Controller\IndexController::index
 
-gen:
-    path: /gen/{file}
-    controller: App\Controller\IndexController::f
-    requirements:
-        file: .+
 
 file:
-    path: /file
-    controller: App\Controller\IndexController::ff
+    path: /new
+    controller: App\Controller\IndexController::validateFile
+    methods: POST
+
+gen:
+    path: /gen/{file}
+    controller: App\Controller\IndexController::showFile
+    methods: GET
+    requirements:
+        file: '.+'
+
+generate:
+    path: /gen/{file}
+    controller: App\Controller\IndexController::generateFile
+    methods: POST
+    requirements:
+        file: '.+'
 
