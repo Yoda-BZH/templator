@@ -238,9 +238,10 @@ class IndexController extends AbstractController
       }
 
       $render = $this->render(str_replace('../templates', '', $jinjas . '/' . $requestedFilename), $templateVars);
+      $viewName = strpos($request->headers->get('User-Agent'), 'curl') !== false ? 'index/api.html' : 'index/template.html';
 
       return $this->render(
-        'index/template.html',
+        $viewName,
         array(
           'config' => $config,
           'form' => $form->createView(),
