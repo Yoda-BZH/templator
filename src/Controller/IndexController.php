@@ -36,7 +36,7 @@ class IndexController extends AbstractController
       }
       //var_dump($files);
 
-      $configFilename = str_replace($files[0]->getExtension(), 'yaml', $requestedFilename);
+      $configFilename = str_replace('.' . $files[0]->getExtension(), '.yaml', $requestedFilename);
       
       return $configFilename;
     }
@@ -232,7 +232,8 @@ class IndexController extends AbstractController
 
       $form->handleRequest($request);
 
-      if ($form->isSubmitted() && $form->isValid()) {
+      if ($form->isSubmitted() && $form->isValid())
+      {
           $data = $form->getData();
           $templateVars = array_merge($templateVars, $data);
       }
