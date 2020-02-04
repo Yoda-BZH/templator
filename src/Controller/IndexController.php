@@ -22,7 +22,7 @@ class IndexController extends AbstractController
     
     protected function checkFilename($requestedFilename)
     {
-      return preg_match('/^[a-zA-Z0-9][a-zA-Z0-9\.\-\/]+$/', $requestedFilename);
+      return preg_match('/^[a-zA-Z0-9][a-zA-Z0-9\.\-_\/]+$/', $requestedFilename);
     }
     
     protected function getConfigFile($jinjas, $requestedFilename)
