@@ -1,16 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<form method="post" action="{{ path('file') }}">
-  <select name="file" id="file">
-    {% for dirname, files in filenames %}
-    <optgroup label="{{ dirname }}">
+
+<div class="accordion" id="accordionExample">
+  {% for dirname, files in filenames %}
+  <div class="card">
+    <div class="card-header" id="heading{{ loop.index }}">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ loop.index }}" aria-expanded="true" aria-controls="collapseOne">
+          {{ dirname | replace({'/' : ' / '}) }}
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapse{{ loop.index }}" class="collapse" aria-labelledby="heading{{ loop.index }}" data-parent="#accordionExample">
+      <div class="card-body">
+        <ul>
     {% for filename in files %}
-      <option value="{{ dirname }}/{{ filename }}">{{ filename }}</option>
-    {% endfor %}
-  </optgroup>
+          <li><a href="{{ path('gen', { 'file': dirname ~ '/' ~ filename } ) }}">{{ dirname }} / {{ filename }}</a></li>
+    {%endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
   {% endfor %}
-  </select>
-  <input type="submit" value="Valider" />
-</form>
+
+</div>
+
+
 {% endblock %}
