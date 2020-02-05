@@ -2,15 +2,15 @@
 
 
 {% block body %}
-<div class="row" style="height: 100%">
-  <div class="col" id="templateConfig">
+<div class="row">
+  <div class="col-6" id="templateConfig">
     {{ form(form) }}
     <hr />
   <input class="btn btn-primary" type="button" id="copyToClipBoard" data-copied="Donn&eacute;es copi&eacute;es dans le presse-papier" value="Copier dans le presse-papier" />
   </div>
 
 
-  <div class="col" id="render">
+  <div class="col-6" id="render">
     {# <textarea readonly="readonly" height="100%" style="height: 100%;font-size: 80%" class="bg-white form-control text-monospace small" id="renderData"> #}
     <pre class="border"><code class="{{ language }}" id="renderData">
       {{- render|raw -}}
