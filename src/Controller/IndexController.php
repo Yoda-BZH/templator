@@ -189,6 +189,7 @@ class IndexController extends AbstractController
       return $this->render(
         'index/template.html',
         array(
+          'language' => 'language-plaintext',
           'config' => $config,
           'form' => $form->createView(),
           'render' => $template,
@@ -244,6 +245,7 @@ class IndexController extends AbstractController
       return $this->render(
         $viewName,
         array(
+          'language' => 'language-plaintext',
           'config' => $config,
           'form' => $form->createView(),
           'render' => $render->getContent()
