@@ -23,7 +23,7 @@
   <div id="template" class="col mt-4">
 {% set curl = "curl " %}
 {% for item in form %}
-{% if item.vars.name != "Submit" and item.vars.name != 'file' %}
+{% if item.vars.name != "Submit" and item.vars.name != 'file' and '_hash' not in item.vars.name %}
 {% set curl = curl ~ "-F 'form[" ~ item.vars.name ~ "]=" ~ (item.vars.value != "" ? item.vars.value : "value") ~ "' " %}
 {% endif %}
 {% endfor %}
