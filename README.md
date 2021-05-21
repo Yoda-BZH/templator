@@ -37,7 +37,9 @@ types are :
   * select
   * password
 * `default`. The default value for the variable.
-* For `select`type, `values` is mandatory. It contains the possible choices
+* For `select`type, `values` is mandatory. It contains the possible choices.
+* The types `select`, `int` and `string` can have a `help` field that will be displayed as a description below the text input.
+* The type `string` can be set optional by setting the attribute `required` to `false`.
 
 
 Example :
@@ -49,6 +51,7 @@ vars:
   an_int:
     type: int
     default: 3.14
+    help: "This is a number"
   a_choice:
     type: select
     values:
@@ -58,6 +61,11 @@ vars:
   a_password:
     type: password
     default: ""
+  comment:
+    type: string
+    default: ""
+    required: false
+    help: "this is a comment you can add"
 ```
 
 Images:
