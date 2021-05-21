@@ -106,22 +106,22 @@ class IndexController extends AbstractController
         {
           case 'int':
             $type = IntegerType::class;
-            $formBuilder->add($key, $type, array('data' => $varData['default']));
+            $options = array('data' => $varData['default']);
+            isset($varData['help']) && $options['help'] = $varData['help'];
+            $formBuilder->add($key, $type, $options);
             break;
           case 'string':
             $type = TextType::class;
             $required = $varData['required'] ?? true;
             $options = array('data' => $varData['default'], 'required' => $required);
-            if(isset($varData['help']))
-            {
-              $options['help'] = $varData['help'];
-            }
+            isset($varData['help']) && $options['help'] = $varData['help'];
             $formBuilder->add($key, $type, $options);
             break;
           case 'select':
             $type = ChoiceType::class;
             $choices = array_combine($varData['values'], $varData['values']);
             $options = array('choices' => $choices);
+            isset($varData['help']) && $options['help'] = $varData['help'];
             if(isset($varData['default']))
             {
               $options['data'] = $varData['default'];
